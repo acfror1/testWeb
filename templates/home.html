@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+  <!--/.carousel-indicator -->
+  <ol class="carousel-indicators">
+    {% for item in object_list %}
+    {% if item.id == object_list.0.id %}
+    <li data-target="#header-carousel" data-slide-to="{{ item.id|add:-1 }}" class="active"><span
+        class="small-circle"></span>
+    </li>
+    {% else %}
+    <li data-target="#header-carousel" data-slide-to="{{ item.id|add:-1 }}"><span class="small-circle"></span></li>
+    {% endif %}
+    {% endfor %}
+  </ol><!-- /ol-->
+  <!--/.carousel-indicator -->
+
+  <!--/.carousel-inner -->
+  <div class="carousel-inner" role="listbox">
+    {% for item in object_list %}
+    <!-- .item -->
+    {% if item.id == object_list.0.id %}
+
+    <div class="item active">
+      {% else %}
+      <div class="item">
+        {% endif %}
+
+
+        <div class="single-slide-item slide{{ item.id }}">
+          <div class="container">
+            <div class="welcome-hero-content">
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="single-welcome-hero">
+                    <div class="welcome-hero-txt">
+                      <h4>{{ item.category }}</h4>
+                      <h2><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h2>
+                      <p>
+                        {{ item.description}}
+                      </p>
+                      <div class="packages-price">
+                        {% if item.discount_price %}
+                        <p>
+                          ${{ item.discount_price }}
+                          <del>${{ item.price }}</del>
+                        </p>
+                        {% else %}
+                        <p>
+                          ${{ item.price }}
+                        </p>
+                        {% endif %}
+                      </div>
+                      <button class="btn-cart welcome-add-cart" onclick="window.location.href='#new-arrivals'">
+                        <span class="lnr lnr-apartment"></span>
+                        more <span>on</span> sale
+                      </button>
+
+                    </div>
+                    <!--/.welcome-hero-txt-->
+                  </div>
+                  <!--/.single-welcome-hero-->
+                </div>
+                <!--/.col-->
+                <div class="col-sm-5">
+                  <div class="single-welcome-hero">
+                    <div class="welcome-hero-img">
+                      <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt="slider image"></a>
+                    </div>
+                    <!--/.welcome-hero-txt-->
+                  </div>
+                  <!--/.single-welcome-hero-->
+                </div>
+                <!--/.col-->
+              </div>
+              <!--/.row-->
+            </div>
+            <!--/.welcome-hero-content-->
+          </div><!-- /.container-->
+        </div><!-- /.single-slide-item-->
+
+      </div><!-- /.item .active-->
+
+      {% endfor %}
+
+
+    </div><!-- /.carousel-inner-->
+
+  </div>
+  <!--/#header-carousel-->
+  <!--sofa-collection start -->
+  <section id="sofa-collection">
+    <div class="owl-carousel owl-theme" id="collection-carousel">
+      <div class="sofa-collection collectionbg1">
+        <div class="container">
+          <div class="sofa-collection-txt">
+            <h2>upcomming collections</h2>
+            <p>
+              The Loz super hero set is almost here! Build your favorite heros with Loz hrero playsets! Get ready to
+              create a epic heroic scenes with your own amazing adventures with our upcomming legendary characters.
+              check us
+              frequently so you won't miss it!
+            </p>
+            <div class="sofa-collection-price">
+              <h4>strting from <span>$ 199</span></h4>
+            </div>
+            <button class="btn-cart welcome-add-cart sofa-collection-btn" onclick="window.location.href='#'">
+              Comming soon
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--/.sofa-collection-->
+      <div class="sofa-collection collectionbg2">
+        <div class="container">
+          <div class="sofa-collection-txt">
+            <h2>upcomming collections</h2>
+            <p>
+              The Loz avengers set is almost here! Team up with other legendary Marvel characters on daring missions to
+              defeat super villains. Get together with cool minifigures, vehicles, buildings, gadgets and weapons to
+              create your
+              own univrse! check us frequently so you won't miss it!
+            </p>
+            <div class="sofa-collection-price">
+              <h4>strting from <span>$ 299</span></h4>
+            </div>
+            <button class="btn-cart welcome-add-cart sofa-collection-btn" onclick="window.location.href='#'">
+              Comming soon
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--/.sofa-collection-->
+    </div>
+    <!--/.collection-carousel-->
+  </section>
+  <!--/.sofa-collection-->
+  <!--sofa-collection end -->
+
+  <!--new-arrivals start -->
+  <section id="new-arrivals" class="new-arrivals">
+    <div class="container">
+      <div class="section-header">
+        <h2>new arrivals</h2>
+      </div>
+      <!--/.section-header-->
+      <div class="new-arrivals-content">
+        <div class="row">
+
+          {% for item in object_list %}
+          <div class="col-md-3 col-sm-4">
+            <div class="single-new-arrival">
+              <div class="single-new-arrival-bg">
+                <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt="new-arrivals images">
+                  <div class="single-new-arrival-bg-overlay"></div>
+                  <div class="sale bg-1">
+                    <p>sale</p>
+                  </div>
+                </a>
+                <div class="new-arrival-cart">
+                  <p>
+                    <span class="lnr lnr-cart"></span>
+                    <a href="{{ item.get_add_to_cart_url }}">add <span>to </span> cart</a>
+                  </p>
+                  <p class="arrival-review pull-right">
+                    <span class="lnr lnr-heart"></span>
+                    <span class="lnr lnr-frame-expand"></span>
+                  </p>
+                </div>
+              </div>
+              <h4><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
+              <p class="arrival-product-price">${{ item.price }}</p>
+            </div>
+          </div>
+          {% endfor %}
+
+
+
+        </div>
+      </div>
+
+      {% if is_paginated %}
+      <ul class="pagination" style="display:flex; justify-content: center">
+
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}#new-arrivals"><i class="fa fa-chevron-left"
+              aria-hidden="true"></i></a></li>
+        {% else %}
+        <li class="disabled"><span><i class="fa fa-chevron-left" aria-hidden="true"></i></span></li>
+        {% endif %}
+
+        {% if page_obj.number|add:'-4' > 1 %}
+        <li><a href="?page={{ page_obj.number|add:'-5' }}#new-arrivals">&hellip;</a></li>
+        {% endif %}
+
+        {% for i in page_obj.paginator.page_range %}
+        {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %} <li><a
+            href="?page={{ i }}#new-arrivals">{{ i }}</a>
+          </li>
+          {% endif %}
+          {% endfor %}
+
+          {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+          <li><a href="?page={{ page_obj.number|add:'5' }}#new-arrivals">&hellip;</a></li>
+          {% endif %}
+
+          {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}#new-arrivals"><i class="fa fa-chevron-right"
+                aria-hidden="true"></i></a>
+          </li>
+          {% else %}
+          <li class="disabled"><span><i class="fa fa-chevron-right" aria-hidden="true"></i></span></li>
+          {% endif %}
+
+      </ul>
+      {% endif %}
+    </div>
+    <!--/.container-->
+
+  </section>
+  <!--/.new-arrivals-->
+  <!--new-arrivals end -->
+
+  {% endblock content %}

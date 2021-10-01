@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel-inner" role="listbox">
+
+    <div class="container">
+      <div class="welcome-hero-content">
+        <div class="row">
+          <!--/.col-->
+          <div class="col-sm-5">
+            <div class="single-welcome-hero">
+              <div class="welcome-hero-img">
+                <img src="{{ item.image.url }}" alt=""></a>
+              </div>
+              <!--/.welcome-hero-txt-->
+            </div>
+            <!--/.single-welcome-hero-->
+          </div>
+          <!--/.col-->
+
+          <div class="col-sm-7">
+            <div class="single-welcome-hero">
+              <div class="welcome-hero-txt">
+                <div class="packages-price">
+                  {% if item.discount_price %}
+                  <h4>
+                    ${{ item.discount_price }}
+                    <del>${{ item.price }}</del>
+                  </h4>
+                  {% else %}
+                  <h4>
+                    ${{ item.price }}
+                  </h4>
+                  {% endif %}
+                </div>
+
+                <h2>{{ item.title }}</h2>
+                <p>
+                  {{ item.description}}
+                </p>
+
+                <h4>{{ item.category }}</h4>
+
+
+                <button class="btn-cart welcome-add-cart"
+                  onclick="window.location.href='{{ object.get_add_to_cart_url }}'">
+                  <i class="fas fa-cart-plus"></i>
+                  &nbsp;&nbsp;add <span>to</span> cart
+                </button>
+                <button class="btn-cart welcome-add-cart welcome-more-info"
+                  onclick="window.location.href='{{ object.get_remove_from_cart_url }}'">
+                  <i class="fas fa-trash"></i>
+                  &nbsp;&nbsp;remove <span>from</span> cart
+                </button>
+
+
+
+
+              </div>
+              <!--/.welcome-hero-txt-->
+            </div>
+            <!--/.single-welcome-hero-->
+          </div>
+
+        </div>
+        <!--/.row-->
+      </div>
+      <!--/.welcome-hero-content-->
+    </div><!-- /.container-->
+
+
+
+  </div>
+</div>
+
+
+{% endblock content %}
