@@ -60,6 +60,9 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
